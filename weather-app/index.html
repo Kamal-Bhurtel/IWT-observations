@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Weather App</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
@@ -19,7 +19,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 20px;
+      padding: 16px;
       color: #fff;
     }
 
@@ -28,29 +28,31 @@
       max-width: 420px;
       background: rgba(255, 255, 255, 0.12);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-radius: 24px;
-      padding: 30px 25px;
+      padding: 28px 22px;
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.18);
     }
 
     h1 {
       text-align: center;
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       font-weight: 600;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
       letter-spacing: 0.5px;
     }
 
     .search-box {
       display: flex;
       gap: 10px;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
 
     .search-box input {
       flex: 1;
-      padding: 14px 18px;
+      min-width: 0;
+      padding: 14px 16px;
       border: none;
       border-radius: 50px;
       font-size: 15px;
@@ -66,7 +68,7 @@
     }
 
     .search-box button {
-      padding: 0 22px;
+      padding: 0 20px;
       border: none;
       border-radius: 50px;
       background: #ff6b6b;
@@ -76,11 +78,13 @@
       cursor: pointer;
       transition: 0.3s;
       font-family: 'Poppins', sans-serif;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .search-box button:hover {
       background: #ff5252;
-      transform: scale(1.05);
+      transform: scale(1.03);
     }
 
     #weather {
@@ -95,77 +99,128 @@
     }
 
     .city-name {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 600;
       margin-bottom: 5px;
+      word-break: break-word;
     }
 
     .temp {
-      font-size: 4.2rem;
+      font-size: 3.6rem;
       font-weight: 300;
-      margin: 10px 0;
+      margin: 8px 0;
       line-height: 1;
     }
 
     .description {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       text-transform: capitalize;
       opacity: 0.9;
-      margin-bottom: 25px;
+      margin-bottom: 22px;
     }
 
     .details {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 15px;
-      margin-top: 10px;
+      gap: 12px;
+      margin-top: 8px;
     }
 
     .detail-box {
       background: rgba(255, 255, 255, 0.15);
-      padding: 15px 10px;
+      padding: 14px 10px;
       border-radius: 16px;
       backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
     }
 
     .detail-box .label {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       opacity: 0.8;
       margin-bottom: 4px;
     }
 
     .detail-box .value {
-      font-size: 1.15rem;
+      font-size: 1.05rem;
       font-weight: 500;
     }
 
     #error {
       text-align: center;
-      margin-top: 15px;
+      margin-top: 14px;
       color: #ffb3b3;
       font-size: 0.95rem;
     }
 
     .loading {
       text-align: center;
-      padding: 30px 0;
-      font-size: 1.1rem;
+      padding: 28px 0;
+      font-size: 1.05rem;
       opacity: 0.9;
     }
 
-    /* Spinner */
     .spinner {
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border: 4px solid rgba(255,255,255,0.3);
       border-top-color: #fff;
       border-radius: 50%;
-      margin: 0 auto 15px;
+      margin: 0 auto 14px;
       animation: spin 0.8s linear infinite;
     }
 
     @keyframes spin {
       to { transform: rotate(360deg); }
+    }
+
+    /* Mobile improvements */
+    @media (max-width: 400px) {
+      body {
+        padding: 12px;
+        align-items: flex-start;
+        padding-top: 24px;
+      }
+
+      .container {
+        padding: 22px 16px;
+        border-radius: 20px;
+      }
+
+      h1 {
+        font-size: 1.4rem;
+        margin-bottom: 18px;
+      }
+
+      .search-box {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .search-box input {
+        width: 100%;
+        padding: 13px 16px;
+      }
+
+      .search-box button {
+        width: 100%;
+        padding: 13px 16px;
+      }
+
+      .temp {
+        font-size: 3.2rem;
+      }
+
+      .city-name {
+        font-size: 1.25rem;
+      }
+
+      .details {
+        gap: 10px;
+      }
+
+      .detail-box {
+        padding: 12px 8px;
+      }
     }
   </style>
 </head>
