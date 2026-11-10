@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Book Explorer</title>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -61,8 +60,6 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
-      position: relative;
-      overflow: hidden;
       min-width: 180px;
     }
 
@@ -179,7 +176,6 @@
       line-height: 1.5;
     }
 
-    /* Mobile */
     @media (max-width: 600px) {
       body {
         padding: 20px 12px;
@@ -216,7 +212,7 @@
   <div class="container">
     <header>
       <h1>Book Explorer</h1>
-      <p>Discover classic literature from Project Gutenberg with a single click</p>
+      <p>Discover classic literature from Open Library with a single click</p>
       <button class="btn-load" id="load-books">
         <span class="btn-text">Load Books</span>
         <div class="spinner"></div>
@@ -228,77 +224,71 @@
   </div>
 
   <script>
-    $(document).ready(function () {
-      const $btn = $("#load-books");
-      const $btnText = $btn.find(".btn-text");
-      const $spinner = $btn.find(".spinner");
-      const $status = $("#status");
-      const $list = $("#books-list");
+    document.addEventListener("DOMContentLoaded", function () {
+      const btn = document.getElementById("load-books");
+      const btnText = btn.querySelector(".btn-text");
+      const spinner = btn.querySelector(".spinner");
+      const status = document.getElementById("status");
+      const list = document.getElementById("books-list");
 
-      $btn.click(function () {
-        $list.empty();
-        $status.text("");
+      btn.addEventListener("click", function () {
+        list.innerHTML = "";
+        status.textContent = "";
 
-        $btn.prop("disabled", true);
-        $btnText.hide();
-        $spinner.show();
-        $status.text("Fetching amazing books...");
+        btn.disabled = true;
+        btnText.style.display = "none";
+        spinner.style.display = "block";
+        status.textContent = "Fetching amazing books...";
 
-        // Use fetch (more reliable on mobile) with timeout
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 12000);
+        // Open Library API (reliable + CORS friendly)
+        const url = "https://openlibrary.org/search.json?q=classic+literature&limit=20";
 
-        fetch("https://gutendex.com/books/?page=1", {
-          method: "GET",
-          signal: controller.signal,
-          headers: {
-            "Accept": "application/json"
-          }
-        })
-        .then(response => {
-          clearTimeout(timeoutId);
-          if (!response.ok) throw new Error("Network response was not ok");
-          return response.json();
-        })
-        .then(data => {
-          const books = data.results || [];
-          if (books.length === 0) {
-            $status.html('<div class="error-box">No books found. Please try again.</div>');
-            return;
-          }
+        fetch(url)
+          .then(function (response) {
+            if (!response.ok) throw new Error("Network response was not ok");
+            return response.json();
+          })
+          .then(function (data) {
+            const books = data.docs || [];
 
-          $status.text("Showing " + books.length + " popular classics");
+            if (books.length === 0) {
+              status.innerHTML = '<div class="error-box">No books found. Please try again.</div>';
+              return;
+            }
 
-          books.forEach(function (book, index) {
-            const author = (book.authors && book.authors.length > 0)
-              ? book.authors[0].name
-              : "Unknown Author";
+            status.textContent = "Showing " + books.length + " popular classics";
 
-            const delay = index * 0.06;
+            books.forEach(function (book, index) {
+              const title = book.title || "Unknown Title";
+              const author = (book.author_name && book.author_name.length > 0)
+                ? book.author_name[0]
+                : "Unknown Author";
 
-            $list.append(
-              '<div class="book-card" style="animation-delay: ' + delay + 's">' +
+              const delay = index * 0.06;
+
+              const card = document.createElement("div");
+              card.className = "book-card";
+              card.style.animationDelay = delay + "s";
+              card.innerHTML =
                 '<div class="book-number">' + (index + 1) + '</div>' +
-                '<div class="book-title">' + book.title + '</div>' +
-                '<div class="book-author">by ' + author + '</div>' +
-              '</div>'
-            );
+                '<div class="book-title">' + title + '</div>' +
+                '<div class="book-author">by ' + author + '</div>';
+
+              list.appendChild(card);
+            });
+          })
+          .catch(function (err) {
+            console.error(err);
+            status.innerHTML =
+              '<div class="error-box">' +
+                'Failed to load books.<br>Please check your internet connection and try again.' +
+              '</div>';
+          })
+          .finally(function () {
+            btn.disabled = false;
+            spinner.style.display = "none";
+            btnText.style.display = "inline";
           });
-        })
-        .catch(function (err) {
-          clearTimeout(timeoutId);
-          console.error(err);
-          $status.html(
-            '<div class="error-box">' +
-              'Failed to load books.<br>Please check your internet connection and try again.' +
-            '</div>'
-          );
-        })
-        .finally(function () {
-          $btn.prop("disabled", false);
-          $spinner.hide();
-          $btnText.show();
-        });
       });
     });
   </script>
