@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | CS Department</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">💻 <span>CS</span> Dept</a>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="courses.html">Courses</a></li>
+        </ul>
+    </nav>
+
+    <div class="dashboard-header">
+        <div class="container">
+            <h1>Welcome, <span id="student-name">Student</span> 👋</h1>
+            <p>Student Portal Dashboard</p>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="info-card">
+            <h3>👤 Personal Information</h3>
+            <div class="info-row">
+                <span>Full Name</span>
+                <span id="info-name">-</span>
+            </div>
+            <div class="info-row">
+                <span>Email</span>
+                <span id="info-email">-</span>
+            </div>
+            <div class="info-row">
+                <span>Student ID</span>
+                <span id="info-studentid">-</span>
+            </div>
+            <div class="info-row">
+                <span>Year</span>
+                <span id="info-year">-</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>📚 Enrolled Courses (Sample)</h3>
+            <div class="info-row">
+                <span>CS201 - DSA</span>
+                <span style="color: #10b981;">Active</span>
+            </div>
+            <div class="info-row">
+                <span>CS301 - Databases</span>
+                <span style="color: #10b981;">Active</span>
+            </div>
+            <div class="info-row">
+                <span>CS402 - Web Dev</span>
+                <span style="color: #10b981;">Active</span>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h3>📅 Quick Actions</h3>
+            <p style="color: var(--text-muted); margin-bottom: 1rem;">You are successfully logged into the CS Department portal.</p>
+            <button class="btn btn-danger" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Computer Science Department. All rights reserved.</p>
+    </footer>
+
+    <script src="js/auth.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = requireAuth();
+            if (user) {
+                document.getElementById('student-name').textContent = user.name;
+                document.getElementById('info-name').textContent = user.name;
+                document.getElementById('info-email').textContent = user.email;
+                document.getElementById('info-studentid').textContent = user.studentId;
+                document.getElementById('info-year').textContent = user.year;
+            }
+        });
+    </script>
+</body>
+</html>

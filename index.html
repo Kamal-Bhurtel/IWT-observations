@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="description"
+        content="Kamal Prasad Bhurtel — Full-Stack Developer & MCA student at Pondicherry University. Building clean, modern web experiences.">
+
+    <meta name="theme-color" content="#0b0f19">
+
+    <title>Kamal Prasad Bhurtel — Portfolio</title>
+
+    <!-- Portfolio CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="dark-theme">
+
+    <!-- =========================
+         Side Navigation
+    ========================== -->
+
+    <nav class="side-nav" id="side-nav" aria-label="Portfolio sections">
+
+        <button class="nav-toggle"
+            id="nav-toggle"
+            type="button"
+            aria-label="Open navigation"
+            aria-expanded="false"
+            aria-controls="side-nav-list">
+
+            <i class="fa-solid fa-bars"
+                id="nav-toggle-icon"
+                aria-hidden="true"></i>
+
+        </button>
+
+        <ul class="side-nav-list" id="side-nav-list">
+
+            <li>
+                <a href="#profile"
+                    class="nav-link active"
+                    data-section="profile">
+
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    <span>Profile</span>
+
+                </a>
+            </li>
+
+            <li>
+                <a href="#connect"
+                    class="nav-link"
+                    data-section="connect">
+
+                    <i class="fa-solid fa-share-nodes" aria-hidden="true"></i>
+                    <span>Connect</span>
+
+                </a>
+            </li>
+
+            <li>
+                <a href="#education"
+                    class="nav-link"
+                    data-section="education">
+
+                    <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                    <span>Education</span>
+
+                </a>
+            </li>
+
+            <li>
+                <a href="#lab-work"
+                    class="nav-link"
+                    data-section="lab-work">
+
+                    <i class="fa-solid fa-laptop-code" aria-hidden="true"></i>
+                    <span>Lab Work</span>
+
+                </a>
+            </li>
+
+            <li>
+                <a href="#skills"
+                    class="nav-link"
+                    data-section="skills">
+
+                    <i class="fa-solid fa-code" aria-hidden="true"></i>
+                    <span>Skills</span>
+
+                </a>
+            </li>
+
+        </ul>
+    </nav>
+
+
+    <!-- =========================
+         Main Portfolio
+    ========================== -->
+
+    <div class="portfolio-container">
+
+        <!-- Theme Toggle -->
+
+        <div class="top-bar">
+
+            <button id="theme-toggle"
+                class="theme-btn"
+                aria-label="Toggle light and dark theme"
+                type="button">
+
+                <i class="fa-solid fa-sun"
+                    id="theme-icon"
+                    aria-hidden="true"></i>
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             Profile
+        ========================== -->
+
+        <header id="profile"
+            class="bento-card profile-card">
+
+            <div class="profile-header">
+
+                <div class="avatar-container">
+
+                    <img src="images/profilePic.jpeg"
+                        alt="Portrait of Kamal Prasad Bhurtel"
+                        class="avatar"
+                        width="88"
+                        height="88">
+
+                </div>
+
+                <div class="profile-info">
+
+                    <h1>Kamal Prasad Bhurtel</h1>
+
+                    <p class="age-role">
+                        22 · Full-Stack Developer
+                    </p>
+
+                    <p class="university">
+
+                        <i class="fa-solid fa-graduation-cap"
+                            aria-hidden="true"></i>
+
+                        MCA · Pondicherry University
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <p class="bio">
+
+                Building seamless e-commerce solutions and exploring
+                modern web technologies.
+
+                I focus on clean code, thoughtful interfaces,
+                and reliable full-stack systems.
+
+            </p>
+
+
+            <div class="action-buttons">
+
+                <a href="#lab-work"
+                    class="btn primary-btn">
+
+                    <i class="fa-solid fa-laptop-code"
+                        aria-hidden="true"></i>
+
+                    View Lab Work
+
+                </a>
+
+
+                <a href="mailto:your-email@example.com"
+                    class="btn secondary-btn">
+
+                    <i class="fa-solid fa-envelope"
+                        aria-hidden="true"></i>
+
+                    Contact
+
+                </a>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             Connect
+        ========================== -->
+
+        <section id="connect"
+            class="bento-card socials-card"
+            aria-labelledby="socials-heading">
+
+            <h2 id="socials-heading"
+                class="card-heading">
+
+                Connect
+
+            </h2>
+
+
+            <div class="social-grid">
+
+                <a href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn">
+
+                    <i class="fa-brands fa-github"
+                        aria-hidden="true"></i>
+
+                    <span>GitHub</span>
+
+                </a>
+
+
+                <a href="https://x.com/iamBhurtel"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn">
+
+                    <i class="fa-brands fa-x-twitter"
+                        aria-hidden="true"></i>
+
+                    <span>X / Twitter</span>
+
+                </a>
+
+
+                <a href="https://www.linkedin.com/in/kamal-prasad-bhurtel-1507762a7/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn">
+
+                    <i class="fa-brands fa-linkedin-in"
+                        aria-hidden="true"></i>
+
+                    <span>LinkedIn</span>
+
+                </a>
+
+
+                <a href="https://discord.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="social-btn">
+
+                    <i class="fa-brands fa-discord"
+                        aria-hidden="true"></i>
+
+                    <span>Discord</span>
+
+                </a>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Education
+        ========================== -->
+
+        <section id="education"
+            class="bento-card section-card"
+            aria-labelledby="education-heading">
+
+            <h2 id="education-heading">
+                Education
+            </h2>
+
+
+            <div class="timeline">
+
+                <article class="timeline-item">
+
+                    <div class="timeline-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+
+                    <div class="timeline-content">
+
+                        <h3>
+                            Master of Computer Applications (MCA)
+                        </h3>
+
+                        <p class="role-sub">
+                            Pondicherry University
+                        </p>
+
+                        <span class="date">
+                            2025 – 2027 · Present
+                        </span>
+
+                    </div>
+
+                </article>
+
+
+                <article class="timeline-item">
+
+                    <div class="timeline-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-user-graduate"></i>
+
+                    </div>
+
+
+                    <div class="timeline-content">
+
+                        <h3>
+                            Bachelor of Computer Applications (BCA)
+                        </h3>
+
+                        <p class="role-sub">
+                            Punjab University
+                        </p>
+
+                        <span class="date">
+                            2021 – 2024 · Completed
+                        </span>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Lab Work
+        ========================== -->
+
+        <section id="lab-work"
+            class="bento-card section-card"
+            aria-labelledby="lab-heading">
+
+            <h2 id="lab-heading">
+                Lab Work
+            </h2>
+
+
+            <div class="projects-grid">
+
+
+                <!-- Shopping Website -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="shopping-website/ShopHub-Online-Store/shop/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Shopping Website project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-store"></i>
+
+                    </div>
+
+                    <h3>
+                        Shopping Website
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Responsive e-commerce platform with product
+                        catalogs, cart flows, and dynamic state management.
+
+                    </p>
+
+                    <span class="project-tag">
+                        Full-Stack
+                    </span>
+
+                </article>
+
+
+                <!-- Quiz Application -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="quiz-application/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Quiz Application project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-circle-question"></i>
+
+                    </div>
+
+                    <h3>
+                        Quiz Application
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Interactive quiz app with timed questions,
+                        scoring system, and result summary.
+
+                    </p>
+
+                    <span class="project-tag">
+                        Frontend
+                    </span>
+
+                </article>
+
+
+                <!-- Scientific Calculator -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="scientific-calculator/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Scientific Calculator project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-calculator"></i>
+
+                    </div>
+
+                    <h3>
+                        Scientific Calculator
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Calculator with scientific functions including
+                        trigonometry, logarithms, and exponents.
+
+                    </p>
+
+                    <span class="project-tag">
+                        JavaScript
+                    </span>
+
+                </article>
+
+
+                <!-- Employee Form -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="employee-form/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Employee Form project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-id-card"></i>
+
+                    </div>
+
+                    <h3>
+                        Employee Form
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Form-driven employee data entry with validation
+                        and structured record handling.
+
+                    </p>
+
+                    <span class="project-tag">
+                        Forms
+                    </span>
+
+                </article>
+
+
+                <!-- Department Website -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="cs-department-website/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Department Website project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-building-columns"></i>
+
+                    </div>
+
+                    <h3>
+                        Department Website
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Informational site for a university department
+                        with sections for faculty, courses, and notices.
+
+                    </p>
+
+                    <span class="project-tag">
+                        Frontend
+                    </span>
+
+                </article>
+
+
+                <!-- Company Portal -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="company-website/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Company Portal project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <h3>
+                        Company Portal
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Internal-style company portal with navigation,
+                        content modules, and role-oriented layouts.
+
+                    </p>
+
+                    <span class="project-tag">
+                        Full-Stack
+                    </span>
+
+                </article>
+
+
+                <!-- Contact Manager -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="contact-manager/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Contact Manager project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-address-book"></i>
+
+                    </div>
+
+                    <h3>
+                        Contact Manager
+                    </h3>
+
+                    <p class="project-desc">
+
+                        CRUD contact manager for adding, editing,
+                        searching, and organizing personal contacts.
+
+                    </p>
+
+                    <span class="project-tag">
+                        CRUD
+                    </span>
+
+                </article>
+
+
+                <!-- Weather API -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="weather-app/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Weather API project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-cloud-sun"></i>
+
+                    </div>
+
+                    <h3>
+                        Weather API
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Weather dashboard consuming a public API to show
+                        current conditions and forecasts by location.
+
+                    </p>
+
+                    <span class="project-tag">
+                        API
+                    </span>
+
+                </article>
+
+
+                <!-- Book API Explorer -->
+
+                <article class="project-card project-card--linked">
+
+                    <a href="Book API explorer/index.html"
+                        class="project-card-link"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Open Book API Explorer project">
+                    </a>
+
+                    <div class="project-icon"
+                        aria-hidden="true">
+
+                        <i class="fa-solid fa-book-open"></i>
+
+                    </div>
+
+                    <h3>
+                        Book API Explorer
+                    </h3>
+
+                    <p class="project-desc">
+
+                        Book search and discovery tool powered by an
+                        external books API with filters and details view.
+
+                    </p>
+
+                    <span class="project-tag">
+                        API
+                    </span>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             Skills
+        ========================== -->
+
+        <section id="skills"
+            class="bento-card section-card"
+            aria-labelledby="skills-heading">
+
+            <h2 id="skills-heading">
+                Skills & Technologies
+            </h2>
+
+
+            <div class="skill-filters"
+                role="group"
+                aria-label="Filter skills by category">
+
+                <button type="button"
+                    class="filter-btn active"
+                    data-filter="all">
+
+                    All
+
+                </button>
+
+
+                <button type="button"
+                    class="filter-btn"
+                    data-filter="frontend">
+
+                    Frontend
+
+                </button>
+
+
+                <button type="button"
+                    class="filter-btn"
+                    data-filter="backend">
+
+                    Backend
+
+                </button>
+
+
+                <button type="button"
+                    class="filter-btn"
+                    data-filter="core">
+
+                    Languages & Tools
+
+                </button>
+
+            </div>
+
+
+            <div class="skills-grid"
+                id="skills-grid">
+
+
+                <span class="skill-tag"
+                    data-category="frontend">
+
+                    <i class="fa-brands fa-html5"
+                        aria-hidden="true"></i>
+
+                    HTML5
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="frontend">
+
+                    <i class="fa-brands fa-css3-alt"
+                        aria-hidden="true"></i>
+
+                    CSS3
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="frontend">
+
+                    <i class="fa-brands fa-js"
+                        aria-hidden="true"></i>
+
+                    JavaScript
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="frontend">
+
+                    <i class="fa-brands fa-react"
+                        aria-hidden="true"></i>
+
+                    React
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="frontend">
+
+                    <i class="fa-brands fa-angular"
+                        aria-hidden="true"></i>
+
+                    Angular
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="backend">
+
+                    <i class="fa-brands fa-node-js"
+                        aria-hidden="true"></i>
+
+                    Express
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="core">
+
+                    <i class="fa-brands fa-python"
+                        aria-hidden="true"></i>
+
+                    Python
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="core">
+
+                    <i class="fa-solid fa-code"
+                        aria-hidden="true"></i>
+
+                    C
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="core">
+
+                    <i class="fa-solid fa-code"
+                        aria-hidden="true"></i>
+
+                    C++
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="core">
+
+                    <i class="fa-brands fa-git-alt"
+                        aria-hidden="true"></i>
+
+                    Git
+
+                </span>
+
+
+                <span class="skill-tag"
+                    data-category="core">
+
+                    <i class="fa-brands fa-github"
+                        aria-hidden="true"></i>
+
+                    GitHub
+
+                </span>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- Portfolio JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>

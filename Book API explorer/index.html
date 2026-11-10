@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Explorer</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+      min-height: 100vh;
+      color: #fff;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #a78bfa, #f472b6, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      letter-spacing: -1px;
+    }
+
+    header p {
+      color: #c4b5fd;
+      font-size: 1.15rem;
+      max-width: 500px;
+      margin: 0 auto 30px;
+    }
+
+    /* Button */
+    .btn-load {
+      background: linear-gradient(90deg, #8b5cf6, #ec4899);
+      color: white;
+      border: none;
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-load:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(139, 92, 246, 0.5);
+    }
+
+    .btn-load:active {
+      transform: translateY(0);
+    }
+
+    .btn-load:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading Spinner */
+    .spinner {
+      display: none;
+      width: 24px;
+      height: 24px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Status */
+    #status {
+      text-align: center;
+      margin: 30px 0 20px;
+      font-size: 1rem;
+      color: #c4b5fd;
+      min-height: 28px;
+    }
+
+    /* Books Grid */
+    #books-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 20px;
+    }
+
+    .book-card {
+      background: rgba(255, 255, 255, 0.07);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.5s forwards;
+    }
+
+    .book-card:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(167, 139, 250, 0.4);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .book-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #8b5cf6, #ec4899);
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .book-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      color: #f5f3ff;
+    }
+
+    .book-author {
+      color: #a78bfa;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .error-box {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      color: #fca5a5;
+      padding: 16px 24px;
+      border-radius: 12px;
+      text-align: center;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+      
+      .btn-load {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Book Explorer</h1>
+      <p>Discover classic literature from Project Gutenberg with a single click</p>
+      <button class="btn-load" id="load-books">
+        <span class="btn-text">Load Books</span>
+        <div class="spinner"></div>
+      </button>
+    </header>
+
+    <div id="status"></div>
+    <div id="books-list"></div>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      const $btn = $("#load-books");
+      const $btnText = $btn.find(".btn-text");
+      const $spinner = $btn.find(".spinner");
+      const $status = $("#status");
+      const $list = $("#books-list");
+
+      $btn.click(function () {
+        // Reset UI
+        $list.empty();
+        $status.text("");
+
+        // Loading state
+        $btn.prop("disabled", true);
+        $btnText.hide();
+        $spinner.show();
+        $status.text("Fetching amazing books...");
+
+        $.ajax({
+          url: "https://gutendex.com/books/",
+          method: "GET",
+          dataType: "json",
+          success: function (response) {
+            $status.text(`Showing ${response.results.length} popular classics`);
+
+            $.each(response.results, function (index, book) {
+              const author = book.authors.length > 0 
+                ? book.authors[0].name 
+                : "Unknown Author";
+
+              // Stagger the animation delay
+              const delay = index * 0.07;
+
+              $list.append(`
+                <div class="book-card" style="animation-delay: ${delay}s">
+                  <div class="book-number">${index + 1}</div>
+                  <div class="book-title">${book.title}</div>
+                  <div class="book-author">by ${author}</div>
+                </div>
+              `);
+            });
+          },
+          error: function () {
+            $status.html(`
+              <div class="error-box">
+                Failed to load books. Please try again.
+              </div>
+            `);
+          },
+          complete: function () {
+            // Restore button
+            $btn.prop("disabled", false);
+            $spinner.hide();
+            $btnText.show();
+          }
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>

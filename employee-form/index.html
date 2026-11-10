@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Portal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- Left Branding Panel -->
+        <div class="left-panel">
+            <div class="brand">
+                <h1>Employee<br>Portal</h1>
+                <p>Secure access to your workplace account</p>
+            </div>
+            <div class="features">
+                <div class="feature">✓ Easy registration</div>
+                <div class="feature">✓ Secure login</div>
+                <div class="feature">✓ Employee management</div>
+            </div>
+        </div>
+
+        <!-- Right Form Panel -->
+        <div class="right-panel">
+            <div class="form-header">
+                <button class="tab-btn active" id="loginTab" onclick="showLogin()">Sign In</button>
+                <button class="tab-btn" id="registerTab" onclick="showRegister()">Sign Up</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="form" method="POST" action="login.php">
+                <h2>Welcome Back</h2>
+                <p class="subtitle">Please sign in to continue</p>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Enter your email" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Enter your password" required>
+                </div>
+
+                <button type="submit" class="btn-primary">Sign In</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="form hidden" method="POST" action="register.php">
+                <h2>Create Account</h2>
+                <p class="subtitle">Fill in your details to register</p>
+
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="full_name" placeholder="Enter full name" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Email Address</label>
+                    <input type="email" name="email" placeholder="Enter email" required>
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" name="password" placeholder="Minimum 6 characters" required minlength="6">
+                </div>
+
+                <div class="input-group">
+                    <label>Employee ID</label>
+                    <input type="text" name="employee_id" placeholder="Enter employee ID" required>
+                </div>
+
+                <div class="row">
+                    <div class="input-group">
+                        <label>Department</label>
+                        <input type="text" name="department" placeholder="Department">
+                    </div>
+                    <div class="input-group">
+                        <label>Phone</label>
+                        <input type="tel" name="phone" placeholder="Phone number">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

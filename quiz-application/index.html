@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechMaster Quiz | DS • OS • DBMS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --surface: #1e293b;
+            --surface-2: #334155;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --success: #22c55e;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --text: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border: #475569;
+            --radius: 12px;
+            --shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            line-height: 1.5;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(34, 197, 94, 0.06) 0%, transparent 40%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 720px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), #8b5cf6);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 32px;
+            box-shadow: var(--shadow);
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .start-screen h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .start-screen p {
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            font-size: 1rem;
+        }
+
+        .topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 32px;
+        }
+
+        .topic-tag {
+            background: rgba(59, 130, 246, 0.15);
+            color: #93c5fd;
+            padding: 6px 14px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .info-item {
+            text-align: center;
+            padding: 16px 8px;
+            background: var(--surface-2);
+            border-radius: 10px;
+        }
+
+        .info-item .value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .info-item .label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--surface-2);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .progress-bar-container {
+            margin-bottom: 24px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--surface-2);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), #8b5cf6);
+            border-radius: 999px;
+            transition: width 0.4s ease;
+        }
+
+        .question-meta {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .badge-ds { background: rgba(59, 130, 246, 0.2); color: #93c5fd; }
+        .badge-os { background: rgba(34, 197, 94, 0.2); color: #86efac; }
+        .badge-dbms { background: rgba(245, 158, 11, 0.2); color: #fcd34d; }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.45;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: var(--surface-2);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            width: 100%;
+            color: var(--text);
+            font-size: 0.975rem;
+            font-family: inherit;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .option.selected {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.15);
+        }
+
+        .option.correct {
+            border-color: var(--success);
+            background: rgba(34, 197, 94, 0.15);
+        }
+
+        .option.wrong {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.12);
+        }
+
+        .option.disabled {
+            cursor: default;
+        }
+
+        .option-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+            flex-shrink: 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .option.selected .option-letter {
+            background: var(--primary);
+            color: white;
+        }
+
+        .option.correct .option-letter {
+            background: var(--success);
+            color: white;
+        }
+
+        .option.wrong .option-letter {
+            background: var(--danger);
+            color: white;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 12px;
+        }
+
+        .nav-buttons .btn {
+            flex: 1;
+        }
+
+        .results-screen {
+            text-align: center;
+        }
+
+        .score-circle {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin: 0 auto 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 6px solid;
+            position: relative;
+        }
+
+        .score-circle.excellent { border-color: var(--success); }
+        .score-circle.good { border-color: var(--primary); }
+        .score-circle.average { border-color: var(--warning); }
+        .score-circle.poor { border-color: var(--danger); }
+
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1;
+        }
+
+        .score-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .result-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .result-message {
+            color: var(--text-muted);
+            margin-bottom: 28px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-bottom: 28px;
+        }
+
+        .stat-box {
+            background: var(--surface-2);
+            padding: 16px 8px;
+            border-radius: 10px;
+        }
+
+        .stat-box .num {
+            font-size: 1.5rem;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stat-box .txt {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .stat-box.correct .num { color: var(--success); }
+        .stat-box.wrong .num { color: var(--danger); }
+        .stat-box.total .num { color: var(--primary); }
+
+        .review-section {
+            text-align: left;
+            margin-top: 8px;
+        }
+
+        .review-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .review-item {
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+        }
+
+        .review-item:last-child {
+            border-bottom: none;
+        }
+
+        .review-q {
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .review-ans {
+            font-size: 0.875rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .review-ans span {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .ans-correct { color: var(--success); }
+        .ans-wrong { color: var(--danger); }
+        .ans-yours { color: var(--text-muted); }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 560px) {
+            .card {
+                padding: 24px 18px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .question-text {
+                font-size: 1.1rem;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- START SCREEN -->
+        <div id="start-screen" class="card start-screen">
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">⚡</div>
+                    TechMaster Quiz
+                </div>
+                <p class="subtitle">Test your core Computer Science fundamentals</p>
+            </div>
+
+            <h1>Ready to challenge yourself?</h1>
+            <p>10 carefully crafted multiple-choice questions covering the essential topics every tech student should master.</p>
+
+            <div class="topics">
+                <span class="topic-tag">Data Structures</span>
+                <span class="topic-tag">Operating Systems</span>
+                <span class="topic-tag">DBMS</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="value">10</div>
+                    <div class="label">Questions</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">~8</div>
+                    <div class="label">Minutes</div>
+                </div>
+                <div class="info-item">
+                    <div class="value">MCQ</div>
+                    <div class="label">Format</div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" onclick="startQuiz()">
+                Start Quiz →
+            </button>
+        </div>
+
+        <!-- QUIZ SCREEN -->
+        <div id="quiz-screen" class="card hidden">
+            <div class="progress-bar-container">
+                <div class="progress-info">
+                    <span id="question-counter">Question 1 of 10</span>
+                    <span id="progress-percent">10%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 10%"></div>
+                </div>
+            </div>
+
+            <div class="question-meta">
+                <span class="badge" id="topic-badge">DS</span>
+            </div>
+
+            <h2 class="question-text" id="question-text"></h2>
+
+            <div class="options" id="options-container"></div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-secondary" id="prev-btn" onclick="prevQuestion()" disabled>← Previous</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next →</button>
+            </div>
+        </div>
+
+        <!-- RESULTS SCREEN -->
+        <div id="results-screen" class="card results-screen hidden">
+            <div class="score-circle" id="score-circle">
+                <div class="score-value" id="score-value">0%</div>
+                <div class="score-label">Score</div>
+            </div>
+
+            <h2 class="result-title" id="result-title">Well Done!</h2>
+            <p class="result-message" id="result-message"></p>
+
+            <div class="stats-row">
+                <div class="stat-box correct">
+                    <div class="num" id="correct-count">0</div>
+                    <div class="txt">Correct</div>
+                </div>
+                <div class="stat-box wrong">
+                    <div class="num" id="wrong-count">0</div>
+                    <div class="txt">Wrong</div>
+                </div>
+                <div class="stat-box total">
+                    <div class="num">10</div>
+                    <div class="txt">Total</div>
+                </div>
+            </div>
+
+            <div class="nav-buttons" style="margin-bottom: 28px;">
+                <button class="btn btn-secondary" onclick="showReview()">Review Answers</button>
+                <button class="btn btn-primary" onclick="restartQuiz()">Retake Quiz</button>
+            </div>
+
+            <div id="review-container" class="review-section hidden">
+                <h3 class="review-title">Answer Review</h3>
+                <div id="review-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        TechMaster Quiz • Built for CS students
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                topic: "DS",
+                topicClass: "badge-ds",
+                question: "Which data structure follows the Last In First Out (LIFO) principle?",
+                options: ["Queue", "Stack", "Linked List", "Tree"],
+                correct: 1
+            },
+            {
+                topic: "DS",
+                topicClass: "badge-ds",
+                question: "What is the average time complexity of searching for an element in a balanced Binary Search Tree?",
+                options: ["O(n)", "O(log n)", "O(n log n)", "O(1)"],
+                correct: 1
+            },
+            {
+                topic: "DS",
+                topicClass: "badge-ds",
+                question: "In which tree traversal do we visit the left subtree, then the root, and finally the right subtree?",
+                options: ["Pre-order", "In-order", "Post-order", "Level-order"],
+                correct: 1
+            },
+            {
+                topic: "OS",
+                topicClass: "badge-os",
+                question: "Which of the following is NOT a necessary condition for a deadlock to occur?",
+                options: ["Mutual Exclusion", "Hold and Wait", "Preemption", "Circular Wait"],
+                correct: 2
+            },
+            {
+                topic: "OS",
+                topicClass: "badge-os",
+                question: "Which CPU scheduling algorithm can give the minimum average waiting time for a given set of processes?",
+                options: ["First Come First Serve (FCFS)", "Round Robin", "Shortest Job First (SJF)", "Priority Scheduling"],
+                correct: 2
+            },
+            {
+                topic: "OS",
+                topicClass: "badge-os",
+                question: "What is the main difference between a process and a thread?",
+                options: [
+                    "Threads are heavier than processes",
+                    "Processes share the same memory space, threads do not",
+                    "Threads within a process share the same memory space",
+                    "There is no difference"
+                ],
+                correct: 2
+            },
+            {
+                topic: "DBMS",
+                topicClass: "badge-dbms",
+                question: "In the ACID properties of a transaction, what does the letter 'A' stand for?",
+                options: ["Availability", "Atomicity", "Accuracy", "Authorization"],
+                correct: 1
+            },
+            {
+                topic: "DBMS",
+                topicClass: "badge-dbms",
+                question: "Which normal form eliminates transitive dependency?",
+                options: ["1NF", "2NF", "3NF", "BCNF"],
+                correct: 2
+            },
+            {
+                topic: "DBMS",
+                topicClass: "badge-dbms",
+                question: "Which type of JOIN returns all rows from the left table and matching rows from the right table?",
+                options: ["INNER JOIN", "RIGHT JOIN", "LEFT JOIN", "FULL OUTER JOIN"],
+                correct: 2
+            },
+            {
+                topic: "DBMS",
+                topicClass: "badge-dbms",
+                question: "What is the primary purpose of an index in a database?",
+                options: [
+                    "To enforce data integrity",
+                    "To speed up data retrieval operations",
+                    "To store backup of the table",
+                    "To define relationships between tables"
+                ],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let userAnswers = new Array(questions.length).fill(null);
+
+        function startQuiz() {
+            document.getElementById('start-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            document.getElementById('question-counter').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('progress-percent').textContent = `${Math.round(progress)}%`;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+
+            const badge = document.getElementById('topic-badge');
+            badge.textContent = q.topic;
+            badge.className = `badge ${q.topicClass}`;
+
+            document.getElementById('question-text').textContent = q.question;
+
+            const optionsContainer = document.getElementById('options-container');
+            optionsContainer.innerHTML = '';
+
+            const letters = ['A', 'B', 'C', 'D'];
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option';
+                if (userAnswers[currentQuestion] === idx) {
+                    btn.classList.add('selected');
+                }
+                btn.innerHTML = `
+                    <span class="option-letter">${letters[idx]}</span>
+                    <span>${opt}</span>
+                `;
+                btn.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById('prev-btn').disabled = currentQuestion === 0;
+            const nextBtn = document.getElementById('next-btn');
+            nextBtn.disabled = userAnswers[currentQuestion] === null;
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Submit Quiz' : 'Next →';
+        }
+
+        function selectOption(idx) {
+            userAnswers[currentQuestion] = idx;
+            showQuestion();
+        }
+
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === null) return;
+
+            if (currentQuestion === questions.length - 1) {
+                showResults();
+            } else {
+                currentQuestion++;
+                showQuestion();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            let correct = 0;
+            userAnswers.forEach((ans, i) => {
+                if (ans === questions[i].correct) correct++;
+            });
+
+            const wrong = questions.length - correct;
+            const percentage = Math.round((correct / questions.length) * 100);
+
+            document.getElementById('score-value').textContent = `${percentage}%`;
+            document.getElementById('correct-count').textContent = correct;
+            document.getElementById('wrong-count').textContent = wrong;
+
+            const circle = document.getElementById('score-circle');
+            const title = document.getElementById('result-title');
+            const message = document.getElementById('result-message');
+
+            circle.className = 'score-circle';
+            if (percentage >= 90) {
+                circle.classList.add('excellent');
+                title.textContent = 'Outstanding! 🏆';
+                message.textContent = 'You have excellent command over core CS fundamentals. Keep up the great work!';
+            } else if (percentage >= 70) {
+                circle.classList.add('good');
+                title.textContent = 'Great Job! 👏';
+                message.textContent = 'Solid performance! You understand most concepts well. A little more practice will make you unstoppable.';
+            } else if (percentage >= 50) {
+                circle.classList.add('average');
+                title.textContent = 'Good Effort! 💪';
+                message.textContent = 'You have a decent foundation. Review the topics you missed and try again to improve your score.';
+            } else {
+                circle.classList.add('poor');
+                title.textContent = 'Keep Practicing! 📚';
+                message.textContent = 'Don\'t worry — every expert was once a beginner. Focus on the fundamentals and retake the quiz.';
+            }
+        }
+
+        function showReview() {
+            const container = document.getElementById('review-container');
+            const list = document.getElementById('review-list');
+            list.innerHTML = '';
+
+            questions.forEach((q, i) => {
+                const userAns = userAnswers[i];
+                const isCorrect = userAns === q.correct;
+                const item = document.createElement('div');
+                item.className = 'review-item';
+
+                item.innerHTML = `
+                    <div class="review-q">${i + 1}. ${q.question}</div>
+                    <div class="review-ans">
+                        <span class="ans-correct">✓ Correct: ${q.options[q.correct]}</span>
+                        ${!isCorrect ? `<span class="ans-wrong">✗ Your answer: ${userAns !== null ? q.options[userAns] : 'Not answered'}</span>` : 
+                          `<span class="ans-correct">✓ You got it right!</span>`}
+                    </div>
+                `;
+                list.appendChild(item);
+            });
+
+            container.classList.remove('hidden');
+            container.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            userAnswers = new Array(questions.length).fill(null);
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('review-container').classList.add('hidden');
+            document.getElementById('start-screen').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>

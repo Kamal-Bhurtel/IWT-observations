@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details – ShopHub</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+  <div class="promo-bar">
+    <strong>FREE Shipping</strong> on orders above ₹4,000 &nbsp;|&nbsp; Easy 30-day returns
+  </div>
+  <header class="header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        <i class="fas fa-shopping-bag"></i> Shop<span class="logo-accent">Hub</span>
+      </a>
+      <div class="search-bar desktop-only">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search-input" placeholder="Search products..." autocomplete="off" onkeydown="if(event.key==='Enter'){window.location='index.html'}">
+      </div>
+      <nav class="nav">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#products" class="nav-link">Shop</a>
+        <a href="cart.html" class="nav-link cart-link">
+          <i class="fas fa-shopping-cart"></i>
+          Cart <span id="cart-count" class="cart-badge">0</span>
+        </a>
+      </nav>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Menu">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="product-detail-page">
+    <div class="container">
+      <div class="breadcrumb">
+        <a href="index.html">Home</a>
+        <i class="fas fa-chevron-right"></i>
+        <a href="index.html#products">Shop</a>
+        <i class="fas fa-chevron-right"></i>
+        <span id="breadcrumb-name">Product</span>
+      </div>
+
+      <div class="product-detail" id="product-detail">
+        <!-- Filled by JS -->
+      </div>
+
+      <section class="related-products">
+        <h2 class="section-title">You May Also Like</h2>
+        <div class="product-grid" id="related-grid"></div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><i class="fas fa-shopping-bag"></i> ShopHub</a>
+        <p>Your trusted online shopping destination.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Quick Links</h4>
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Shop</a>
+        <a href="cart.html">Cart</a>
+      </div>
+      <div class="footer-links">
+        <h4>Customer Service</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">FAQs</a>
+        <a href="#">Shipping Info</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 ShopHub. All rights reserved. Demo store – not a real shop.</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="products.js"></script>
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const id = parseInt(params.get('id'));
+      if (id) {
+        renderProductDetail(id);
+        renderRelated(id);
+      } else {
+        document.getElementById('product-detail').innerHTML = '<p class="error">Product not found. <a href="index.html">Back to shop</a></p>';
+      }
+      updateCartCount();
+      setupMobileMenu();
+    });
+  </script>
+</body>
+</html>
